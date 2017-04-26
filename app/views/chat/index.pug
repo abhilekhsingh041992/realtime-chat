@@ -1,0 +1,101 @@
+extends ../bootstrap-layout
+
+append scripts
+    script(src="/javascripts/chat.js")
+
+block body
+    .main_section.fill
+        .container-fluid.fill
+            .chat_container.fill
+                .col-sm-3.chat_sidebar
+                    .row
+                        #custom-search-input
+                            .input-group.col-md-12
+                                input.search-query.form-control(type='text', placeholder='Conversation')
+                                |
+                                button.btn.btn-danger(type='button')
+                                    span.glyphicon.glyphicon-search
+                        .dropdown.all_conversation
+                            button#dropdownMenu2.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                i.fa.fa-weixin(aria-hidden='true')
+                                |  All Conversations
+                                span.caret.pull-right
+                            ul.dropdown-menu(aria-labelledby='dropdownMenu2')
+                                li
+                                    a(href='#') All Conversation
+                                    ul.sub_menu_.list-unstyled
+                                        li
+                                            a(href='#') All Conversation
+                                        li
+                                            a(href='#') Another action
+                                        li
+                                            a(href='#') Something else here
+                                        li
+                                            a(href='#') Separated link
+                                li
+                                    a(href='#') Another action
+                                li
+                                    a(href='#') Something else here
+                                li
+                                    a(href='#') Separated link
+                        .member_list
+                            ul.list-unstyled.channels
+
+                .col-sm-9.message_section
+                    .row
+                        .new_message_head
+                            .pull-left
+                                button.title
+                                    i.fa.fa-plus-square-o(aria-hidden='true')
+                                    |  New Message
+                            .pull-right
+                                .dropdown
+                                    button#dropdownMenu1.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                        i.fa.fa-cogs(aria-hidden='true')
+                                        |  Setting
+                                        span.caret
+                                    ul.dropdown-menu.dropdown-menu-right(aria-labelledby='dropdownMenu1')
+                                        li
+                                            a(href='#') Action
+                                        li
+                                            a(href='#') Profile
+                                        li
+                                            a(href='#') Logout
+                        .chat_area
+                            ul.list-unstyled
+
+                        .message_write
+                            textarea.form-control.message-text(placeholder='type a message')
+                            .clearfix
+                            .chat_bottom
+                                a.pull-left.upload_btn(href='#')
+                                    i.fa.fa-cloud-upload(aria-hidden='true')
+                                    |  Add Files
+                                |
+                                a.pull-right.btn.btn-success.send-message(href='#') Send
+
+
+    #channelHtml
+        li.left.clearfix.channel
+            span.chat-img.pull-left
+                img.img-circle(src='https://api.adorable.io/avatars/285/qwert@sf.png', alt='User Avatar')
+            .chat-body.clearfix
+                .header_sec
+                    strong.primary-font.channelId Jack Sparrow
+                    |
+                    //strong.pull-right 09:45AM
+                .contact_sec
+                    //strong.primary-font (123) 123-456
+                    |
+                    span.badge.pull-right.unread-count 0
+
+    #chatAreaHtml
+        li.left.clearfix
+            span.chat-img1.pull-left
+                img.img-circle(src='', alt='User Avatar')
+                |
+                strong.primary-font.userId.clearfix Jack Sparrow
+            .chat-body1.clearfix
+                p.message-view
+                //p.chat_time.pull-right 09:40PM
+

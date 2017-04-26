@@ -1,0 +1,26 @@
+extends bootstrap-layout
+
+append scripts
+  script(src="/javascripts/index.js")
+
+block body
+  .container
+    .row.row-centered
+      .col-md-20.col-md-offset-2
+        form.form-inline.row.row-centered(method='post')
+          .form-group.col-md-5
+            label(for='username') Username:
+            |
+            |
+            |
+            input#username.form-control(type='text', name='username', placeholder='Enter username')
+          |
+          |
+          |
+          button.btn.btn-default.col-md-2(type='submit', id="signup") Login
+
+
+
+
+
+

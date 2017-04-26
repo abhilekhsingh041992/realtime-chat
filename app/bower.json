@@ -1,0 +1,20 @@
+{
+  "name": "client",
+  "description": "",
+  "main": "",
+  "authors": [
+    "abhilekhsingh041992 <abhilekhsingh041992@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/abhilekhsingh041992/realtime-chat",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.cookie": "jquery-cookie#^1.4.1"
+  }
+}
