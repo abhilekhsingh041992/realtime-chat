@@ -60,23 +60,29 @@ function setChannels(newChannels) {
 }
 
 
-$('ul').on('click', '.channelId', (e) => {
+$('ul').on('click', 'li', (e) => {
   e.preventDefault();
-  let newChannelId = $(e.target).html();
-  console.log(newChannelId);
-  if(newChannelId !== currChannelId) {
-    currChannelId = newChannelId;
-    
-    let $currChannelId = $('#' + currChannelId);
-    $('.member_list li').removeClass('selected');
-    console.log($currChannelId);
-    $('.new_message_head .title').text(currChannelId);
-    $currChannelId.closest('li').addClass('selected');
-    $currChannelId.find('unread-count').hide();
-  
-    $(".chat_area ul").html('');
+  let $target =  $(e.target);
+    console.log($target);
+  if($target.is("li")) {
+      let newChannelId = $target.find('.channelId').html();
+      if(newChannelId !== currChannelId) {
+          currChannelId = newChannelId;
+
+          let $currChannelId = $('#' + currChannelId);
+          $('.member_list li').removeClass('selected');
+          console.log($currChannelId);
+          $('.new_message_head .title').text(currChannelId);
+          $currChannelId.closest('li').addClass('selected');
+          $currChannelId.find('.unread-count').hide();
+
+          $(".chat_area ul").html('');
+          return false;
+      }
   }
-  return false;
+
+
+
 });
 
 

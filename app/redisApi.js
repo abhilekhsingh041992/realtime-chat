@@ -31,3 +31,21 @@ function getChannels(callback) {
 
 module.exports.addChannel = addChannel;
 module.exports.getChannels = getChannels;
+
+
+function addChannels(channels) {
+    channels.forEach(function (channel) {
+       addChannel(channel);
+    });
+}
+
+addChannels([
+    "Sports",
+    "Adventure",
+    "travels",
+    "Art",
+    "fashion",
+    "News",
+    "Technology",
+    "Design"
+]);
