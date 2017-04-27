@@ -41,39 +41,10 @@ block body
                         .member_list
                             ul.list-unstyled.channels
 
+
+
+
                 .col-sm-9.message_section
-                    .row
-                        .new_message_head
-                            .pull-left
-                                button.title
-                                    i.fa.fa-plus-square-o(aria-hidden='true')
-                                    |  New Message
-                            .pull-right
-                                .dropdown
-                                    button#dropdownMenu1.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                                        i.fa.fa-cogs(aria-hidden='true')
-                                        |  Setting
-                                        span.caret
-                                    ul.dropdown-menu.dropdown-menu-right(aria-labelledby='dropdownMenu1')
-                                        li
-                                            a(href='#') Action
-                                        li
-                                            a(href='#') Profile
-                                        li
-                                            a(href='#') Logout
-                        .chat_area
-                            ul.list-unstyled
-
-                        .message_write
-                            textarea.form-control.message-text(placeholder='type a message')
-                            .clearfix
-                            .chat_bottom
-                                a.pull-left.upload_btn(href='#')
-                                    i.fa.fa-cloud-upload(aria-hidden='true')
-                                    |  Add Files
-                                |
-                                a.pull-right.btn.btn-success.send-message(href='#') Send
-
 
     #channelHtml
         li.left.clearfix.channel
@@ -89,7 +60,7 @@ block body
                     |
                     span.badge.pull-right.unread-count 0
 
-    #chatAreaHtml
+    #chatMessageHtml
         li.left.clearfix
             span.chat-img1.pull-left
                 img.img-circle(src='', alt='User Avatar')
@@ -99,3 +70,35 @@ block body
                 p.message-view
                 //p.chat_time.pull-right 09:40PM
 
+    #chatAreaHtml
+        .row.chat-area
+            .new_message_head
+                .pull-left
+                    button.title
+                        i.fa.fa-plus-square-o(aria-hidden='true')
+                        |  New Message
+                .pull-right
+                    .dropdown
+                        button#dropdownMenu1.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                            i.fa.fa-cogs(aria-hidden='true')
+                            |  Setting
+                            span.caret
+                        ul.dropdown-menu.dropdown-menu-right(aria-labelledby='dropdownMenu1')
+                            li
+                                a(href='#') Action
+                            li
+                                a(href='#') Profile
+                            li
+                                a(href='#') Logout
+            .chat_area
+                ul.list-unstyled
+
+            .message_write
+                textarea.form-control.message-text(placeholder='type a message')
+                .clearfix
+                .chat_bottom
+                    a.pull-left.upload_btn(href='#')
+                        i.fa.fa-cloud-upload(aria-hidden='true')
+                        |  Add Files
+                    |
+                    a.pull-right.btn.btn-success.send-message(href='#') Send

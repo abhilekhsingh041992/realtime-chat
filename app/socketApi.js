@@ -16,6 +16,7 @@ io.on('connection', function(socket) {
     channels.forEach(function (channelId) {
       socket.on(channelId, function (data) {
         console.log(data);
+        redisApi.addMessage(channelId, data);
         io.sockets.emit(channelId, data);
       });
     })

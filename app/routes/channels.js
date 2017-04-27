@@ -19,6 +19,28 @@ router.get('/new', function(req, res, next) {
 });
 
 
+router.get('/:channelId/messages', function(req, res, next) {
+  let channelId = req.params.channelId;
+  let start = req.query.start;
+  let stop = req.query.stop;
+  
+  if(channelId){
+    if(start && stop) {
+      redisApi.getMessages(channelId, start, stop, function (data) {
+        res.json(data);
+      });
+    } else {
+      redisApi.getRecentMessages(channelId, 2, function (messages) {
+        res.json(data);
+      });
+    }
+    
+  } else {
+    res.json("Required parameters not passed");
+  }
+});
+
+
 module.exports = router;
 
 

@@ -28,6 +28,28 @@ function getChannels(callback) {
   });
 }
 
+function addMessage(channelName, message) {
+  
+  client.lpush(channelName, JSON.stringify(message))
+}
+
+function getRecentMessages(channelName, count, callback) {
+  return client.llen(channelName, function(err, reply) {
+    return getMessages(channelName, reply-count, reply, callback);
+  });
+}
+
+
+function getMessages(channelName, start, stop, callback) {
+  return client.lrange(channelName, start, stop, function(err, messages) {
+    console.log(messages);
+    callback({offset: start, messages: messages});
+  });
+}
+
 
 module.exports.addChannel = addChannel;
 module.exports.getChannels = getChannels;
+module.exports.addMessage = addMessage;
+module.exports.getMessages = getMessages;
+module.exports.getRecentMessages = getRecentMessages;

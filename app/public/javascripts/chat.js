@@ -8,9 +8,11 @@ const timeout = 5000;
 let channels = [];
 let currChannelId;
 let $channelHtml = $("#channelHtml");
+let $chatMessageHtml = $("#chatMessageHtml");
 let $chatAreaHtml = $("#chatAreaHtml");
-let userId;
 
+let userId;
+let channelOffsets = {};
 
 $(document).ready(() => {
   
@@ -22,7 +24,7 @@ $(document).ready(() => {
   }
  
   $channelHtml.hide();
-  $chatAreaHtml.hide();
+  $chatMessageHtml.hide();
   startRefreshForms();
 });
 
@@ -47,40 +49,34 @@ function setChannels(newChannels) {
   channels = newChannels;
   
   let $channels = $(".channels");
+  let $messageSection = $('.message_section');
   
   newChannels.forEach(function (channel) {
     $channelHtml.find('li').attr('id', channel);
+    $channelHtml.find('li').attr('onclick', 'selectChannel("'+channel+'")');
     $channelHtml.find('.channelId').html(channel);
     $channelHtml.find('img').attr('src', 'https://api.adorable.io/avatars/285/qwert@' + channel + '.png');
     $channelHtml.find('.unread-count').hide();
     $channels.append($channelHtml.html());
+    
+    $chatAreaHtml.find('.chat-area').attr('id', getChannelChatId(channel));
+    $chatAreaHtml.find('.chat-area').hide();
+    $messageSection.append($chatAreaHtml.html());
+    channelOffsets[channel] = -1;
     receiveMessage(channel);
   });
   
 }
 
+function getChannelChatId(channel) {
+    return channel+"chat-area";
+}
 
-$('ul').on('click', '.channelId', (e) => {
-  e.preventDefault();
-  let newChannelId = $(e.target).html();
-  console.log(newChannelId);
-  if(newChannelId !== currChannelId) {
-    currChannelId = newChannelId;
-    
-    let $currChannelId = $('#' + currChannelId);
-    $('.member_list li').removeClass('selected');
-    console.log($currChannelId);
-    $('.new_message_head .title').text(currChannelId);
-    $currChannelId.closest('li').addClass('selected');
-    $currChannelId.find('unread-count').hide();
-  
-    $(".chat_area ul").html('');
-  }
-  return false;
-});
+function getMessages(channelId) {
 
+}
 
-$('.message-text').keypress(function (e) {
+$(document).on('keypress', '.message-text', (e) => {
   const key = e.which;
   console.log(key);
   if(key === 13)  {
@@ -89,14 +85,35 @@ $('.message-text').keypress(function (e) {
   }
 });
 
+
 $(document).on('click', '.send-message', (e) => {
   e.preventDefault();
   readAndSendMessage();
   return false;
 });
 
+
+function selectChannel(newChannelId) {
+  if(newChannelId !== currChannelId) {
+    currChannelId = newChannelId;
+    
+    let $currChannelId = $('#' + currChannelId);
+    let $currChannelArea = $('#' + getChannelChatId(currChannelId));
+    $('.chat-area').hide();
+    $currChannelArea.show();
+    
+    $('.member_list li').removeClass('selected');
+    console.log($currChannelId);
+    $('.new_message_head .title').text(currChannelId);
+    $currChannelId.closest('li').addClass('selected');
+    $currChannelId.find('unread-count').hide();
+  
+  }
+}
+
 function readAndSendMessage() {
-  let messageText = $('.message-text');
+  
+  let messageText = $('#' + getChannelChatId(currChannelId)).find('.message-text');
   let message = messageText.val();
   console.log(message);
   messageText.val(' ');
@@ -109,23 +126,7 @@ function receiveMessage(channelId) {
     console.log(data);
     
     $channelId =  $('#' + channelId);
-    if(channelId === currChannelId) {
-      console.log('Same Channel');
-      let unReadCount = $channelId.find('.unread-count');
-      unReadCount.hide();
-      
-      let $chatArea = $(".chat_area ul");
-      console.log($chatArea);
-      $chatAreaHtml.find('img').attr('src', 'https://api.adorable.io/avatars/285/qwert@' + data.userId + '.png');
-      $chatAreaHtml.find('.userId').html(data.userId);
-      $chatAreaHtml.find('.message-view').html(data.message);
-      $chatArea.append($chatAreaHtml.html());
-  
-      $('.chat_area').animate({
-        scrollTop: $('.chat_area ul li:last-child').offset().top + 'px'
-      });
-
-    } else {
+    if(channelId !== currChannelId) {
       console.log('Different Channel');
       let unReadCount = $channelId.find('.unread-count');
       let count = unReadCount.text();
@@ -135,6 +136,22 @@ function receiveMessage(channelId) {
       unReadCount.html(parseInt(count)+1);
       unReadCount.show();
     }
+  
+    console.log('Same Channel');
+    let unReadCount = $channelId.find('.unread-count');
+    unReadCount.hide();
+  
+    let $chatArea =  $('#' + getChannelChatId(channelId)).find("ul");
+    console.log($chatArea);
+    $chatMessageHtml.find('img').attr('src', 'https://api.adorable.io/avatars/285/qwert@' + data.userId + '.png');
+    $chatMessageHtml.find('.userId').html(data.userId);
+    $chatMessageHtml.find('.message-view').html(data.message);
+    $chatArea.append($chatMessageHtml.html());
+  
+    $('.chat_area').animate({
+      scrollTop: $('.chat_area ul li:last-child').offset().top + 'px'
+    });
+    
   });
 }
 
