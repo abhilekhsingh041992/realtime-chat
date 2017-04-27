@@ -28,24 +28,46 @@ function getChannels(callback) {
   });
 }
 
+function addMessage(channelName, message) {
+  
+  client.lpush(channelName, JSON.stringify(message))
+}
+
+function getRecentMessages(channelName, count, callback) {
+  return client.llen(channelName, function(err, reply) {
+    return getMessages(channelName, reply-count, reply, callback);
+  });
+}
+
+
+function getMessages(channelName, start, stop, callback) {
+  return client.lrange(channelName, start, stop, function(err, messages) {
+    console.log(messages);
+    callback({offset: start, messages: messages});
+  });
+}
+
 
 module.exports.addChannel = addChannel;
 module.exports.getChannels = getChannels;
+module.exports.addMessage = addMessage;
+module.exports.getMessages = getMessages;
+module.exports.getRecentMessages = getRecentMessages;
 
 
 function addChannels(channels) {
     channels.forEach(function (channel) {
-       addChannel(channel);
+        addChannel(channel);
     });
 }
 
-addChannels([
-    "Sports",
-    "Adventure",
-    "travels",
-    "Art",
-    "fashion",
-    "News",
-    "Technology",
-    "Design"
-]);
+// addChannels([
+//     "Sports",
+//     "Adventure",
+//     "travels",
+//     "Art",
+//     "fashion",
+//     "News",
+//     "Technology",
+//     "Design"
+// ]);

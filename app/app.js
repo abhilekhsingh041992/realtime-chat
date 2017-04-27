@@ -42,7 +42,7 @@ app.use('/channels', channels);
 
 
 app.use((req, res, next) => {
-  console.log(url.parse(req.url).pathname);
+  if(['.js', '.css', '.png'].includes(path.extname(req.url))) return next();
   
   if (url.parse(req.url).pathname === '/users/login') {
     return next();
@@ -50,7 +50,8 @@ app.use((req, res, next) => {
   
   if (req.session && req.session.username) {
     return next();
-  } return res.redirect('/users/login');
+  }
+  return res.redirect('/users/login');
 });
 
 // catch 404 and forward to error handler

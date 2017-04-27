@@ -1,5 +1,9 @@
+
+html, body {
+  height: 100%;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,20 +11,41 @@ a {
   color: #00B7FF;
 }
 
+.fa {
+  font-style: normal;
+}
+
 .fill {
   min-height: 100%;
   height: 100%;
 }
 
+.chat_sidebar {
+  background-image: url(http://mdbootstrap.com/img/Photos/Others/sidenav1.jpg);
+  background-blend-mode: darken;
+  background-position: center;
+  background-size: cover;
+  background-color: #595dff;
+  box-shadow: rgba(0, 0, 0, 0);
+  padding: 0 !important;
+  z-index: 999;
+}
+
+.channelId {
+  color: #fff;
+  font-size: 1rem;
+  font-family: Roboto, sans-serif;
+}
 
 #custom-search-input {
-  background: #e8e6e7 none repeat scroll 0 0;
   margin: 0;
-  padding: 10px;
+  margin-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
-#custom-search-input .search-query {
-  background: #fff none repeat scroll 0 0 !important;
-  border-radius: 4px;
+
+.search-query {
+  background: white none repeat scroll 0 0 !important;
   height: 33px;
   margin-bottom: 0;
   padding-left: 7px;
@@ -41,12 +66,16 @@ a {
 }
 .search-query:focus + button {
   z-index: 3;
+  background-color: white;
 }
 .all_conversation button {
-  background: #f5f3f3 none repeat scroll 0 0;
-  border: 1px solid #dddddd;
-  height: 38px;
+  background: transparent none repeat scroll 0 0;
+  border: 0;
+
+  height: 70px;
   text-align: left;
+  font-size: 18px;
+  color: white;
   width: 100%;
 }
 .all_conversation i {
@@ -95,27 +124,22 @@ a {
   overflow: visible;
 }
 .member_list .contact_sec {
-  margin-top: 3px;
+  margin-top: -15px;
 }
 .member_list li {
-  padding: 6px;
+  padding: 12px;
 }
-.member_list ul {
-  border: 1px solid #dddddd;
-}
+
 .chat-img img {
   height: 34px;
   width: 34px;
 }
-.member_list li {
-  border-bottom: 1px solid #dddddd;
-  padding: 6px;
-}
+
 .member_list li:last-child {
   border-bottom:none;
 }
 .member_list {
-  height: 380px;
+  height: 735px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -145,7 +169,7 @@ a {
   border: medium none;
 }
 .new_message_head {
-  background: #f5f3f3 none repeat scroll 0 0;
+  background: #3f51b5 none repeat scroll 0 0;
   float: left;
   font-size: 13px;
   font-weight: 600;
@@ -153,15 +177,33 @@ a {
   width: 100%;
 }
 .message_section {
-  border: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
 }
+
+.unread-count {
+  background-color: red;
+}
+
 .chat_area {
   float: left;
-  height: 300px;
+  height: 600px;
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
+  background-color: rgba(100, 100, 100, 0.1);
 }
+
+.padding-10 {
+  padding: 10px;
+}
+
+.search-conversation {
+  background-color: rgba(100, 100, 100, 0);
+  height: 70px;
+  border: 0;
+  border-bottom: 2px solid white;
+}
+
 .chat_area li {
   padding: 14px 14px 0;
 }
@@ -184,15 +226,20 @@ a {
   padding-bottom: 10px;
 }
 .message_write {
-  background: #f5f3f3 none repeat scroll 0 0;
+  background: white none repeat scroll 0 0;
   float: left;
   padding: 15px;
   width: 100%;
 }
 
+button, i {
+  color: white;
+}
+
 .message_write textarea.form-control {
   height: 70px;
   padding: 10px;
+  background-color: white;
 }
 .chat_bottom {
   float: left;
@@ -200,20 +247,27 @@ a {
   width: 100%;
 }
 .upload_btn {
-  color: #777777;
+  color: white;
 }
 .sub_menu_ > li a, .sub_menu_ > li {
   float: left;
   width:100%;
 }
+
+
 .member_list li:hover {
-  background: #c8c8c8 none repeat scroll 0 0;
+  background-color: #3f51b5;
   color: #fff;
   cursor:pointer;
 }
 
+.member_list li {
+  transition: all .3s linear;
+}
+
 .member_list li.selected {
-  background: #428bca none repeat scroll 0 0;
+  background-color: #2b3fb5;
   color: #fff;
   cursor:pointer;
+  transition: all .3s linear;
 }
