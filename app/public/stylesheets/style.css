@@ -3,9 +3,12 @@ html, body {
   height: 100%;
 }
 
+
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
 
 a {
   color: #00B7FF;
@@ -18,6 +21,11 @@ a {
 .fill {
   min-height: 100%;
   height: 100%;
+}
+
+form.form-inline.row.row-centered {
+  margin-top: 300px;
+  margin-left: 200px;
 }
 
 .chat_sidebar {
@@ -128,6 +136,11 @@ a {
 }
 .member_list li {
   padding: 12px;
+}
+
+.chat-img {
+  height: 50px;
+  width: 50px;
 }
 
 .chat-img img {
